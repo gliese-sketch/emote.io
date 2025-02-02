@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { Card } from "@heroui/card";
 import { Button } from "@heroui/button";
@@ -9,6 +9,12 @@ const socket = io(
 
 function Emote() {
   const [emoji, setEmoji] = useState("😏");
+
+  useEffect(() => {
+    socket.on("new_emoji", (data) => {
+      setEmoji(data);
+    });
+  }, []);
 
   return (
     <main className="min-h-screen flex items-center justify-center gap-4 flex-col">
