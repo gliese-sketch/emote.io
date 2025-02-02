@@ -1,4 +1,4 @@
-import { Card, CardFooter } from "@heroui/card";
+import { Card } from "@heroui/card";
 import { Button } from "@heroui/button";
 import { useState } from "react";
 
@@ -6,21 +6,24 @@ function Emote() {
   const [emoji, setEmoji] = useState("😏");
 
   return (
-    <main className="min-h-screen flex items-center justify-center gap-2 flex-col">
+    <main className="min-h-screen flex items-center justify-center gap-4 flex-col">
+      <h1 className="text-3xl lowercase font-bold">emote.io</h1>
       <Card className="text-6xl p-3">{emoji}</Card>
-      <ShowEmotes />
+      <ShowEmotes setEmoji={setEmoji} />
     </main>
   );
 }
 
-function ShowEmotes() {
+function ShowEmotes({ setEmoji }) {
+  const emojis = ["😀", "😁", "🤣", "😂", "😎", "🙄"];
+
   return (
     <div className="flex gap-2 flex-wrap justify-center">
-      <Button variant="flat">😀</Button>
-      <Button variant="flat">😊</Button>
-      <Button variant="flat">😶</Button>
-      <Button variant="flat">😥</Button>
-      <Button variant="flat">😮</Button>
+      {emojis.map((emoji) => (
+        <Button key={emoji} variant="flat" onPress={() => setEmoji(emoji)}>
+          <p className="text-xl">{emoji}</p>
+        </Button>
+      ))}
     </div>
   );
 }
