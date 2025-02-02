@@ -4,10 +4,23 @@ const express = require("express");
 const app = express();
 const server = http.createServer(app);
 
-app.get("/", (req, res) => {
-  res.send("Hello");
+const PORT = process.env.PORT || 3001;
+
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
 });
 
-server.listen("8000", () => {
-  console.log("Server listening on port 8000");
+io.on("connection", (socket) => {
+  console.log(socket.id);
+});
+
+app.get("/", (req, res) => {
+  res.send("Service is active");
+});
+
+server.listen(PORT, () => {
+  console.log(`Server is active at: ${PORT}`);
 });
