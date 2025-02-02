@@ -1,12 +1,13 @@
 "use client";
 
 import { HeroUIProvider } from "@heroui/react";
+import Emote from "@/components/Emote";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center text-7xl">
+    <div>
       <HeroUIProvider>
-        <h1>HeroUI</h1>
+        <Emote />
       </HeroUIProvider>
     </div>
   );
